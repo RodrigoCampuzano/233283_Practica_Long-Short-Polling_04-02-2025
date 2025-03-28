@@ -17,29 +17,21 @@ const DiscountCounter = () => {
   };
 
   useEffect(() => {
-    // Initial fetch
     fetchDiscountCount();
-
-    // Long polling implementation
-    const poll = () => {
-      fetchDiscountCount();
-      setTimeout(poll, 5000); // Poll every 5 seconds
-    };
-
-    const timeoutId = setTimeout(poll, 5000);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    const interval = setInterval(fetchDiscountCount, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="discount-counter">
       <h2>Products on Discount</h2>
       {isLoading ? (
-        <p>Loading...</p>
+        <p>Loading count...</p>
       ) : (
-        <div className="count">{count}</div>
+        <div className="count-display">
+          <span className="count-number">{count}</span>
+          <span className="count-label">items</span>
+        </div>
       )}
     </div>
   );

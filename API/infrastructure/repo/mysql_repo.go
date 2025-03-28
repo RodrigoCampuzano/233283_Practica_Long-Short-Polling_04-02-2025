@@ -3,7 +3,9 @@ package repo
 import (
 	"ApiShortLong/domain/entities"
 	"ApiShortLong/domain/repo"
+	"context"
 	"database/sql"
+	"time"
 )
 
 type mysqlRepository struct {
@@ -15,7 +17,7 @@ func NewMySQLRepository(db *sql.DB) repo.ProductRepository {
 }
 
 // Optimización para AddProduct
-func (r *mysqlRepository) AddProduct(product domain.Product) error {
+func (r *mysqlRepository) AddProduct(product entities.Product) error {
     ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
     defer cancel()
     
@@ -27,7 +29,7 @@ func (r *mysqlRepository) AddProduct(product domain.Product) error {
 }
 
 // Optimización para GetLastAddedProducts
-func (r *mysqlRepository) GetLastAddedProducts(limit int) ([]domain.Product, error) {
+func (r *mysqlRepository) GetLastAddedProducts(limit int) ([]entities.Product, error) {
     ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
     defer cancel()
     
@@ -40,9 +42,9 @@ func (r *mysqlRepository) GetLastAddedProducts(limit int) ([]domain.Product, err
     }
     defer rows.Close()
 
-    var products []domain.Product
+    var products []entities.Product
     for rows.Next() {
-        var p domain.Product
+        var p entities.Product
         if err := rows.Scan(&p.Nombre, &p.Precio, &p.Codigo, &p.Descuento); err != nil {
             return nil, err
         }
