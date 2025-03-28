@@ -8,7 +8,7 @@ const LastAddedProduct = () => {
   const fetchRecentProducts = async () => {
     try {
       const response = await axios.get('http://localhost:8080/isNewProductAdded');
-      if (response.data.hasNewProducts) {
+      if (response.data.products && response.data.products.length > 0) {
         setProducts(response.data.products);
       }
     } catch (error) {
@@ -27,7 +27,7 @@ const LastAddedProduct = () => {
   return (
     <div className="last-product">
       <h2>Recently Added Products</h2>
-      {isLoading && products.length === 0 ? (
+      {isLoading ? (
         <p>Loading products...</p>
       ) : products.length === 0 ? (
         <p>No products added yet</p>
