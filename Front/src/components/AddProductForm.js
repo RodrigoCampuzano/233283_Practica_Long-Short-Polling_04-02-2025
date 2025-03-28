@@ -51,7 +51,7 @@ const AddProductForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="product-form">
-      <h2>Add New Product</h2>
+      <h2>Producto Nuefo</h2>
       <div className="form-group">
         <label>Name:</label>
         <input

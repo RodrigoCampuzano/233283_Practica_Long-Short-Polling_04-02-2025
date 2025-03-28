@@ -26,7 +26,7 @@ const LastAddedProduct = () => {
 
   return (
     <div className="last-product">
-      <h2>Recently Added Products</h2>
+      <h2>Productos Añadidos Recientemente</h2>
       {isLoading ? (
         <p>Loading products...</p>
       ) : products.length === 0 ? (

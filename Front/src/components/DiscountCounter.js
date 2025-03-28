@@ -24,7 +24,7 @@ const DiscountCounter = () => {
 
   return (
     <div className="discount-counter">
-      <h2>Products on Discount</h2>
+      <h2>Productos en descuento</h2>
       {isLoading ? (
         <p>Loading count...</p>
       ) : (
